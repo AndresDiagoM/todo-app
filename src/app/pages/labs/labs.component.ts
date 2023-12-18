@@ -1,15 +1,13 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { RouterOutlet } from '@angular/router';
 
 @Component({
-  selector: 'app-root',
+  selector: 'app-labs',
   standalone: true,
-  imports: [CommonModule, RouterOutlet],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.sass'
+  imports: [],
+  templateUrl: './labs.component.html',
+  styleUrl: './labs.component.sass'
 })
-export class AppComponent {
+export class LabsComponent {
 
   // --------- Properties ---------
   title = 'todoapp';
@@ -18,10 +16,4 @@ export class AppComponent {
     { title: 'Second Task', description: 'This is the second task', completed: false },
     { title: 'Third Task', description: 'This is the third task', completed: false }
   ];
-
-
-  // --------- Constructor ---------
-
-
-  // --------- Methods ---------
 }
