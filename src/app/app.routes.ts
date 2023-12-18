@@ -1,11 +1,12 @@
 import { Routes } from '@angular/router';
 
 // --------- Components ---------
-import { LabsComponent } from './pages/labs/labs.component';
-import { HomeComponent } from './pages/home/home.component';
+import { LabsComponent } from './website/pages/labs/labs.component';
+import { HomeComponent } from './website/pages/home/home.component';
 
 export const routes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'labs', component: LabsComponent },
-  { path: '**', redirectTo: '' }
+  {
+    path: '',
+    loadChildren: () => import('./website/website.module').then(m => m.WebsiteModule)
+  }
 ];
