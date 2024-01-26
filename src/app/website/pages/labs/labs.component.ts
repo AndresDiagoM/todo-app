@@ -17,4 +17,26 @@ export class LabsComponent {
     { title: 'Second Task', description: 'This is the second task', completed: false },
     { title: 'Third Task', description: 'This is the third task', completed: false }
   ];
+  isDisabled = true;
+  person = {
+    name: 'John',
+    age: 20
+  };
+
+
+  // --------- Constructor ---------
+  constructor() { }
+
+  // --------- Methods ---------
+  onClick($event: any) {
+    console.log('Clicked', $event.target.value);
+  }
+
+  keydownHandler($event: any) {
+    console.log('Keydown', $event.target.value);
+  }
+
+  changeHandler($event: any) {
+    console.log('Change', $event.target.value);
+  }
 }

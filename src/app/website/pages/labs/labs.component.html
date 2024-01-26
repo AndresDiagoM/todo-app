@@ -1,7 +1,32 @@
-<h1> app works </h1>
+<div class="container">
+  <h1>app works</h1>
 
-<ul>
-  <li *ngFor="let item of tasks">
-    {{item.title}}
-  </li>
-</ul>
+  <ul>
+    <li *ngFor="let item of tasks">
+      {{ item.title }}
+    </li>
+  </ul>
+
+  <br />
+  <p>{{ "hola ".repeat(3) }}</p>
+  <p>{{ "hola ".concat("mundo") + "la suma de 1+2 es" + (1 + 2) }}</p>
+
+  <br />
+  <img
+    src="https://picsum.photos/200/300?random=2"
+    alt="angular"
+    width="100px"
+  /><br />
+
+  <!-- Property binding -->
+  <input type="text" [value]="title" />
+  <button [disabled]="isDisabled">Click me</button><br />
+
+  <!-- Event binding: click and double click -->
+  <button (click)="onClick($event)">Click me</button>
+
+  <p>Keydown</p>
+  <input type="text" [value]="person.name" (keydown)="keydownHandler($event)" />
+  <input type="number" [value]="person.age" (change)="changeHandler($event)" />
+  <input type="text" [value]="person.age" (keydown.shift.t)="onClick($event)" />
+</div>
