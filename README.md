@@ -31,12 +31,12 @@
   </a>
 </p>
 
-  <h3 align="center">MyStore</h3>
+  <h3 align="center">Todo APP</h3>
 
   <p align="center">
     A simple store with Angular
     <br />
-    Angular version: 15.2.6 
+    Angular version: 17.0.7
     <br />
     <a href=""><strong>Explore the docs »</strong></a>
     <br />
@@ -102,7 +102,11 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.0.7.
 
-MyStore is a simple store with Angular. It uses the [FakeStoreAPI](https://fakestoreapi.com/) to get the products and show them in the store. You can add products to the cart and see the total price of the products in the cart. You can also see the details of the products and add them to the cart from there.
+The application allows users to manage their daily tasks more effectively. Users can add new tasks, mark tasks as completed, and delete tasks that are no longer needed. 
+
+The application leverages the power of Angular's reactive forms for task input and validation, and uses Angular's HttpClient for communication with a backend API to persist the tasks. The application also showcases Angular's component-based architecture, with different components handling different parts of the app.
+
+The Todo App is a great example of a modern Angular application, demonstrating best practices for structure, testing, and style. It's a perfect starting point for anyone looking to understand how to build applications with Angular.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
