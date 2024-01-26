@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -22,6 +22,7 @@ export class LabsComponent {
     name: 'John',
     age: 20
   };
+  name = signal('John');
 
 
   // --------- Constructor ---------
@@ -38,5 +39,10 @@ export class LabsComponent {
 
   changeHandler($event: any) {
     console.log('Change', $event.target.value);
+  }
+
+  signalHandler($event: any) {
+    console.log('Signal', $event.target.value);
+    this.name.set($event.target.value);
   }
 }

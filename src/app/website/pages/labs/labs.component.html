@@ -29,4 +29,9 @@
   <input type="text" [value]="person.name" (keydown)="keydownHandler($event)" />
   <input type="number" [value]="person.age" (change)="changeHandler($event)" />
   <input type="text" [value]="person.age" (keydown.shift.t)="onClick($event)" />
+
+  <hr><br />
+  <p> REACTIVIDAD GRANULAR</p> <br />
+  <p> {{ "NOMBRE: " + name()  }} </p>
+  <input type="text" [value]="name()" (change)="signalHandler($event)"/>
 </div>
