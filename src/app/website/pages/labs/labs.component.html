@@ -8,15 +8,11 @@
   </ul>
 
   <br />
-  <p>{{ "hola ".repeat(3) }}</p>
-  <p>{{ "hola ".concat("mundo") + "la suma de 1+2 es" + (1 + 2) }}</p>
+  <p>{{ 'hola '.repeat(3) }}</p>
+  <p>{{ 'hola '.concat('mundo') + 'la suma de 1+2 es' + (1 + 2) }}</p>
 
   <br />
-  <img
-    src="https://picsum.photos/200/300?random=2"
-    alt="angular"
-    width="100px"
-  /><br />
+  <img src="https://picsum.photos/200/300?random=2" alt="angular" width="100px" /><br />
 
   <!-- Property binding -->
   <input type="text" [value]="title" />
@@ -30,17 +26,33 @@
   <input type="number" [value]="person.age" (change)="changeHandler($event)" />
   <input type="text" [value]="person.age" (keydown.shift.t)="onClick($event)" />
 
-  <hr><br />
-  <p> REACTIVIDAD GRANULAR</p>
-  <p> {{ "NOMBRE: " + name()  }} </p>
-  <input type="text" [value]="name()" (change)="signalHandler($event)"/>
+  <hr />
+  <br />
+  <p>REACTIVIDAD GRANULAR</p>
+  <p>{{ 'NOMBRE: ' + name() }}</p>
+  <input type="text" [value]="name()" (change)="signalHandler($event)" />
 
-  <hr><br />
-  <p> ESTRUCTURAS DE CONTROL</p>
+  <hr />
+  <br />
+  <p>ESTRUCTURAS DE CONTROL</p>
   <ul>
-    <p> TAMAÑO DE LA LISTA {{ tasks().length }}</p>
-    <li *ngFor="let item of tasks(); index as i">
-      {{i}} {{ item.title }}
-    </li>
+    <p>TAMAÑO DE LA LISTA {{ tasks().length }}</p>
+    <p>ngFor:</p>
+    <li *ngFor="let item of tasks(); index as i">{{ i }} {{ item.title }}</li>
+    <p>ngIf:</p>
+    <li *ngIf="tasks().length > 0">{{ tasks().length }} tareas pendientes</li>
+    <p>ngSwitch:</p>
+    <div [ngSwitch]="tasks().length">
+      <p *ngSwitchCase="0">No hay tareas pendientes</p>
+      <p *ngSwitchCase="1">Hay una tarea pendiente</p>
+      <p *ngSwitchCase="2">Hay dos tareas pendientes</p>
+      <p *ngSwitchDefault>Hay muchas tareas pendientes</p>
+    </div>
   </ul>
+  <p>If using signals</p>
+  <input type="text" [value]="person2().age" (change)="signalHandler2($event)" />
+  <p *ngIf="person2().age > 18; else elseBlock" > {{ person2().name }} es mayor de edad</p>
+  <ng-template #elseBlock>
+    <p>{{ person2().name }} es menor de edad</p>
+  </ng-template>
 </div>

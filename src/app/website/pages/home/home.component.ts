@@ -1,14 +1,15 @@
-import { Component, signal } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, signal } from '@angular/core'
+import { CommonModule } from '@angular/common'
 
-import { Task } from '../../../models/task.model';
+import { Task } from '../../../models/task.model'
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './home.component.html',
-  styleUrl: './home.component.scss',
+  styleUrl: './home.component.scss'
 })
 export class HomeComponent {
   // --------- Properties ---------
@@ -17,27 +18,28 @@ export class HomeComponent {
       id: Date.now(),
       title: 'First Task',
       description: 'This is the first task',
-      completed: false,
+      completed: false
     },
     {
       id: Date.now(),
       title: 'Second Task',
       description: 'This is the second task',
-      completed: false,
+      completed: false
     },
     {
       id: Date.now(),
       title: 'Third Task',
       description: 'This is the third task',
-      completed: false,
+      completed: false
     },
     {
       id: Date.now(),
       title: 'Correr',
       description: 'Correr en la mañana',
-      completed: false,
-    },
-  ]);
+      completed: false
+    }
+  ])
+  editingItem: Task | null = null;
 
   // --------- Constructor ---------
 
@@ -49,34 +51,23 @@ export class HomeComponent {
       id: Date.now(),
       title: $event.target.value,
       description: 'This is the fourth task',
-      completed: false,
-    };
-    this.tasks.update((tasks) => [...tasks, newTask]);
-  }
-
-  updateTask(index: number) {
-    this.tasks.update((tasks) =>
-      tasks.map((task, i) => {
-        if (i === index) {
-          task.completed = !task.completed;
-        }
-        return task;
-      })
-    );
+      completed: false
+    }
+    this.tasks.update((tasks) => [...tasks, newTask])
   }
 
   toggleCompleted(index: number) {
     this.tasks.update((tasks) =>
       tasks.map((task, i) => {
         if (i === index) {
-          task.completed = !task.completed;
+          task.completed = !task.completed
         }
-        return task;
+        return task
       })
-    );
+    )
   }
 
   deleteTask(index: number) {
-    this.tasks.update((tasks) => tasks.filter((task, i) => i !== index));
+    this.tasks.update((tasks) => tasks.filter((task, i) => i !== index))
   }
 }

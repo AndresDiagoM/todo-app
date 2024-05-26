@@ -1,48 +1,55 @@
-import { Component, signal } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, signal } from '@angular/core'
+import { CommonModule } from '@angular/common'
 
 @Component({
   selector: 'app-labs',
   standalone: true,
-  imports: [ CommonModule],
+  imports: [CommonModule],
   templateUrl: './labs.component.html',
   styleUrl: './labs.component.sass'
 })
 export class LabsComponent {
-
   // --------- Properties ---------
-  title = 'todoapp';
+  title = 'todoapp'
   tasks = signal([
     { title: 'First Task', description: 'This is the first task', completed: false },
     { title: 'Second Task', description: 'This is the second task', completed: false },
     { title: 'Third Task', description: 'This is the third task', completed: false }
-  ]);
-  isDisabled = true;
+  ])
+  isDisabled = true
   person = {
     name: 'John',
     age: 20
-  };
-  name = signal('John');
-
+  }
+  name = signal('John')
+  person2 = signal({
+    name: 'Alice',
+    age: 21
+  })
 
   // --------- Constructor ---------
-  constructor() { }
+  constructor() {}
 
   // --------- Methods ---------
   onClick($event: any) {
-    console.log('Clicked', $event.target.value);
+    console.log('Clicked', $event.target.value)
   }
 
   keydownHandler($event: any) {
-    console.log('Keydown', $event.target.value);
+    console.log('Keydown', $event.target.value)
   }
 
   changeHandler($event: any) {
-    console.log('Change', $event.target.value);
+    console.log('Change', $event.target.value)
   }
 
   signalHandler($event: any) {
-    console.log('Signal', $event.target.value);
-    this.name.set($event.target.value);
+    console.log('Signal', $event.target.value)
+    this.name.set($event.target.value)
+  }
+
+  signalHandler2($event: any) {
+    console.log('Signal2', $event.target.value)
+    this.person2.set({ name: 'Alice', age: $event.target.value })
   }
 }
