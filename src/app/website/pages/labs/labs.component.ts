@@ -1,10 +1,11 @@
 import { Component, signal } from '@angular/core'
 import { CommonModule } from '@angular/common'
+import { FormControl, ReactiveFormsModule } from '@angular/forms'
 
 @Component({
   selector: 'app-labs',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './labs.component.html',
   styleUrl: './labs.component.sass'
 })
@@ -26,9 +27,15 @@ export class LabsComponent {
     name: 'Alice',
     age: 21
   })
+  // for handling the form submission
+  colorCtrl = new FormControl('')
 
   // --------- Constructor ---------
-  constructor() {}
+  constructor() {
+    this.colorCtrl.valueChanges.subscribe((value) => {
+      console.log('Color', value)
+    })
+  }
 
   // --------- Methods ---------
   onClick($event: any) {
