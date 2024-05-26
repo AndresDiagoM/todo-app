@@ -13,6 +13,7 @@ const routes: Routes = [
   {
     path: '',
     component: LayoutComponent,
+    // LayoutComponent will be the parent component for HomeComponent and LabsComponent
     children: [
       {
         path: '',
