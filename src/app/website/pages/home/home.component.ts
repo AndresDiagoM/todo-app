@@ -2,12 +2,12 @@ import { Component, signal } from '@angular/core'
 import { CommonModule } from '@angular/common'
 
 import { Task } from '../../../models/task.model'
-import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, ReactiveFormsModule, FormsModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
@@ -47,6 +47,10 @@ export class HomeComponent {
 
   // --------- Methods ---------
   addTask($event: any) {
+    // if the input is empty or contains only spaces, return
+    if (!$event.target.value.trim()) {
+      return
+    }
     let newTask = {
       id: Date.now(),
       title: $event.target.value,
