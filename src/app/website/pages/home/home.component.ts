@@ -2,7 +2,7 @@ import { Component, signal } from '@angular/core'
 import { CommonModule } from '@angular/common'
 
 import { Task } from '../../../models/task.model'
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule, FormControl, Validators } from '@angular/forms'
 
 @Component({
   selector: 'app-home',
@@ -39,25 +39,34 @@ export class HomeComponent {
       completed: false
     }
   ])
-  editingItem: Task | null = null;
+  editingItem: Task | null = null
+  newTaskControl = new FormControl('', {
+    nonNullable: true,
+    validators: [Validators.required]
+  })
 
   // --------- Constructor ---------
 
   constructor() {}
 
   // --------- Methods ---------
-  addTask($event: any) {
-    // if the input is empty or contains only spaces, return
-    if (!$event.target.value.trim()) {
-      return
-    }
-    let newTask = {
+  addTask() {
+    const newTaskValue = this.newTaskControl.value.trim()
+    if (this.newTaskControl.invalid || !newTaskValue) return
+
+    const newTask = this.createTask(newTaskValue)
+    this.tasks.update((tasks) => [...tasks, newTask])
+
+    this.newTaskControl.reset()
+  }
+
+  createTask(title: string) {
+    return {
       id: Date.now(),
-      title: $event.target.value,
-      description: 'This is the fourth task',
+      title: title,
+      description: '',
       completed: false
     }
-    this.tasks.update((tasks) => [...tasks, newTask])
   }
 
   toggleCompleted(index: number) {
