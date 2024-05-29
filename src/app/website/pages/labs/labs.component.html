@@ -19,10 +19,19 @@
   </details>
 
   <!-- Property binding -->
-  <details>
+  <details open>
     <summary>Property binding</summary>
     <input type="text" [value]="title" />
     <button [disabled]="isDisabled">Click me</button><br />
+    <hr />
+    <br />
+    <input type="range" min="0" max="300" [formControl]="widthCtrl"> <br />
+    <svg width="300" height="100">
+      <g>
+        <rect [attr.width]="widthCtrl.value" [attr.height]="100" [attr.fill]="colorCtrl.value"></rect>
+      </g>
+    </svg>
+    <span class="box" [style.width.px]="widthCtrl.value"></span>
   </details>
 
   <!-- Event binding: click and double click -->
@@ -70,4 +79,11 @@
   <p>Controlando Inputs</p>
   <p>color: {{ colorCtrl.value }}</p>
   <input type="color" [formControl]="colorCtrl" />
+  <hr />
+  <br />
+  <p>Clases CSS en Angular</p>
+  <input type="text" [formControl]="nameCtrl"> <br />
+  <!-- <span class="message-error" [class.message-error]="nameCtrl.invalid">Error</span> -->
+  <!-- <span class="message-error" *ngIf="nameCtrl.invalid && nameCtrl.touched">Error</span> -->
+  <span class="message-error" [class.show]="nameCtrl.invalid && nameCtrl.touched">Error</span>
 </div>
