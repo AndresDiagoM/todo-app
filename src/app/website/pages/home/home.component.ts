@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core'
+import { Component, HostListener, signal, ElementRef } from '@angular/core'
 import { CommonModule } from '@angular/common'
 
 import { Task } from '../../../models/task.model'
@@ -47,7 +47,7 @@ export class HomeComponent {
 
   // --------- Constructor ---------
 
-  constructor() {}
+  constructor(private eRef: ElementRef) {}
 
   // --------- Methods ---------
   addTask() {
@@ -78,6 +78,15 @@ export class HomeComponent {
         return task
       })
     )
+  }
+
+  @HostListener('document:click', ['$event'])
+  clickOut(event: { target: any }) {
+    // Only proceed if editingItem is not null (indicating an active editing mode)
+    if (this.editingItem !== null && !this.eRef.nativeElement.contains(event.target)) {
+      this.editingItem = null // Close editing mode
+    }
+    console.log('Document clicked', event) // Debugging line
   }
 
   deleteTask(index: number) {
