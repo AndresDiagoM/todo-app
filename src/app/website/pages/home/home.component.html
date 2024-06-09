@@ -19,7 +19,7 @@
     <section class="main">
       <ul class="todo-list">
         <li
-          *ngFor="let item of tasks(); index as i"
+          *ngFor="let item of filteredTasks(); index as i"
           [ngClass]="{ completed: item.completed, editing: item === editingItem }"
         >
           <div class="view">
@@ -35,19 +35,19 @@
     <footer class="footer">
       <!-- This should be `0 items left` by default -->
       <span class="todo-count">
-        <strong> {{ tasks().length }} </strong>
-        {{ tasks().length > 1 ? 'items' : 'item' }} left
+        <strong> {{ filteredTasks().length }} </strong>
+        {{ filteredTasks().length > 1 ? 'items' : 'item' }} left
       </span>
       <!-- Remove this if you don't implement routing -->
       <ul class="filters">
         <li>
-          <a routerLink="/" class="selected">All</a>
+          <a routerLink="/" (click)="changeFilter('all')" [class.selected]="filter()=='all'">All</a>
         </li>
         <li>
-          <a routerLink="/pending">Pending</a>
+          <a routerLink="/pending" (click)="changeFilter('pending')" [ngClass]="{selected: filter() === 'pending'}">Pending</a>
         </li>
         <li>
-          <a routerLink="/completed">Completed</a>
+          <a routerLink="/completed" (click)="changeFilter('completed')" [ngClass]="{selected: filter() === 'completed'}" >Completed</a>
         </li>
       </ul>
       <!-- Hidden if no completed items are left ↓ -->

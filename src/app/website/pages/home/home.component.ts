@@ -1,8 +1,10 @@
-import { Component, HostListener, signal, ElementRef } from '@angular/core'
+import { Component, HostListener, signal, ElementRef, computed } from '@angular/core'
 import { CommonModule } from '@angular/common'
 
 import { Task } from '../../../models/task.model'
 import { ReactiveFormsModule, FormsModule, FormControl, Validators } from '@angular/forms'
+
+type FilterValues = 'all' | 'completed' | 'pending'
 
 @Component({
   selector: 'app-home',
@@ -37,12 +39,32 @@ export class HomeComponent {
       title: 'Correr',
       description: 'Correr en la mañana',
       completed: false
+    },
+    {
+      id: Date.now(),
+      title: 'Leer',
+      description: 'Correr en la mañana',
+      completed: true
     }
   ])
   editingItem: Task | null = null
   newTaskControl = new FormControl('', {
     nonNullable: true,
     validators: [Validators.required]
+  })
+  filter = signal<FilterValues>('all')
+  filteredTasks = computed(() => {
+    const filter = this.filter()
+    const tasks = this.tasks()
+    console.log('Filtering tasks', filter) // Debugging line
+    // each time one of the filter or tasks signals change, this function will be called
+    if (filter === 'completed') {
+      return tasks.filter((task) => task.completed)
+    } else if (filter === 'pending') {
+      return tasks.filter((task) => !task.completed)
+    } else {
+      return tasks
+    }
   })
 
   // --------- Constructor ---------
@@ -91,5 +113,10 @@ export class HomeComponent {
 
   deleteTask(index: number) {
     this.tasks.update((tasks) => tasks.filter((task, i) => i !== index))
+  }
+
+  changeFilter(filter: FilterValues) {
+    this.filter.set(filter)
+    console.log('Filter changed', filter) // Debugging line
   }
 }
