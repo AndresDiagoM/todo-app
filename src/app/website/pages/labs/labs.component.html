@@ -1,46 +1,89 @@
 <div class="container">
-  <h1>app works</h1>
+  <h1>Angular Concepts Review</h1>
 
-  <ul>
-    <li *ngFor="let item of tasks()">
-      {{ item.title }}
-    </li>
-  </ul>
+  <details>
+    <summary>Repaso de ngFor e interpolación de string</summary>
 
-  <br />
-  <p>{{ "hola ".repeat(3) }}</p>
-  <p>{{ "hola ".concat("mundo") + "la suma de 1+2 es" + (1 + 2) }}</p>
+    <ul>
+      <li *ngFor="let item of tasks()">
+        {{ item.title }}
+      </li>
+    </ul>
 
-  <br />
-  <img
-    src="https://picsum.photos/200/300?random=2"
-    alt="angular"
-    width="100px"
-  /><br />
+    <br />
+    <p>{{ 'hola '.repeat(3) }}</p>
+    <p>{{ 'hola '.concat('mundo') + 'la suma de 1+2 es' + (1 + 2) }}</p>
+
+    <br />
+    <img src="https://picsum.photos/200/300?random=2" alt="angular" width="100px" /><br />
+  </details>
 
   <!-- Property binding -->
-  <input type="text" [value]="title" />
-  <button [disabled]="isDisabled">Click me</button><br />
+  <details open>
+    <summary>Property binding</summary>
+    <input type="text" [value]="title" />
+    <button [disabled]="isDisabled">Click me</button><br />
+    <hr />
+    <br />
+    <input type="range" min="0" max="300" [formControl]="widthCtrl"> <br />
+    <svg width="300" height="100">
+      <g>
+        <rect [attr.width]="widthCtrl.value" [attr.height]="100" [attr.fill]="colorCtrl.value"></rect>
+      </g>
+    </svg>
+    <span class="box" [style.width.px]="widthCtrl.value"></span>
+  </details>
 
   <!-- Event binding: click and double click -->
-  <button (click)="onClick($event)">Click me</button>
+  <details>
+    <summary>Event binding</summary>
+    <button (click)="onClick($event)">Click me</button>
 
-  <p>Keydown</p>
-  <input type="text" [value]="person.name" (keydown)="keydownHandler($event)" />
-  <input type="number" [value]="person.age" (change)="changeHandler($event)" />
-  <input type="text" [value]="person.age" (keydown.shift.t)="onClick($event)" />
+    <p>Keydown</p>
+    <input type="text" [value]="person.name" (keydown)="keydownHandler($event)" />
+    <input type="number" [value]="person.age" (change)="changeHandler($event)" />
+    <input type="text" [value]="person.age" (keydown.shift.t)="onClick($event)" />
+  </details>
 
-  <hr><br />
-  <p> REACTIVIDAD GRANULAR</p>
-  <p> {{ "NOMBRE: " + name()  }} </p>
-  <input type="text" [value]="name()" (change)="signalHandler($event)"/>
+  <hr />
+  <br />
+  <p>REACTIVIDAD GRANULAR</p>
+  <p>{{ 'NOMBRE: ' + name() }}</p>
+  <input type="text" [value]="name()" (change)="signalHandler($event)" />
 
-  <hr><br />
-  <p> ESTRUCTURAS DE CONTROL</p>
+  <hr />
+  <br />
+  <p>ESTRUCTURAS DE CONTROL</p>
   <ul>
-    <p> TAMAÑO DE LA LISTA {{ tasks().length }}</p>
-    <li *ngFor="let item of tasks(); index as i">
-      {{i}} {{ item.title }}
-    </li>
+    <p>TAMAÑO DE LA LISTA {{ tasks().length }}</p>
+    <p>ngFor:</p>
+    <li *ngFor="let item of tasks(); index as i">{{ i }} {{ item.title }}</li>
+    <p>ngIf:</p>
+    <li *ngIf="tasks().length > 0">{{ tasks().length }} tareas pendientes</li>
+    <p>ngSwitch:</p>
+    <div [ngSwitch]="tasks().length">
+      <p *ngSwitchCase="0">No hay tareas pendientes</p>
+      <p *ngSwitchCase="1">Hay una tarea pendiente</p>
+      <p *ngSwitchCase="2">Hay dos tareas pendientes</p>
+      <p *ngSwitchDefault>Hay muchas tareas pendientes</p>
+    </div>
   </ul>
+  <p>If using signals</p>
+  <input type="text" [value]="person2().age" (change)="signalHandler2($event)" />
+  <p *ngIf="person2().age > 18; else elseBlock">{{ person2().name }} es mayor de edad</p>
+  <ng-template #elseBlock>
+    <p>{{ person2().name }} es menor de edad</p>
+  </ng-template>
+  <hr />
+  <br />
+  <p>Controlando Inputs</p>
+  <p>color: {{ colorCtrl.value }}</p>
+  <input type="color" [formControl]="colorCtrl" />
+  <hr />
+  <br />
+  <p>Clases CSS en Angular</p>
+  <input type="text" [formControl]="nameCtrl"> <br />
+  <!-- <span class="message-error" [class.message-error]="nameCtrl.invalid">Error</span> -->
+  <!-- <span class="message-error" *ngIf="nameCtrl.invalid && nameCtrl.touched">Error</span> -->
+  <span class="message-error" [class.show]="nameCtrl.invalid && nameCtrl.touched">Error</span>
 </div>
